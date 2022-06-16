@@ -68,7 +68,7 @@ export class AdRecord implements Ad {
         }
 
         try {
-            const newAd = await database.execute('INSERT INTO `ad` (id, name, description, price, lat, lon, link) VALUES (:id, :name, :description, :price, :lat, :lon, :link)', {
+            await database.execute('INSERT INTO `ad` (id, name, description, price, lat, lon, link) VALUES (:id, :name, :description, :price, :lat, :lon, :link)', {
                 id: this.id,
                 name: this.name,
                 description: this.description,
@@ -78,7 +78,7 @@ export class AdRecord implements Ad {
                 link: this.link,
             });
             const output = `
-                   <a href="http://localhost:3001/api/ad/admin/accepted/${this.id}">Link do akceptacji!</a>
+                   <a href="${config.cors}api/ad/admin/accepted/${this.id}">Link do akceptacji!</a>
                     `;
                 let transporter = nodemailer.createTransport({
                     host: process.env.GMAIL,

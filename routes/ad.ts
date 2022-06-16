@@ -1,5 +1,6 @@
 import {Router} from "express";
 import {AdRecord} from "../records/ad-record";
+import {config} from "../config/config";
 
 
 export const add = Router();
@@ -28,7 +29,7 @@ add
     .get('/admin/accepted/:id', async (req, res) => {
         const {id} = req.params;
         await AdRecord.acceptAd(id);
-        res.status(200).json({msg: 'fine, update'});
+        res.status(200).redirect(`${config.cors}`);
     })
 
     .get('/search/:text?', async (req, res) => {
